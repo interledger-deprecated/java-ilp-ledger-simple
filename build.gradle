@@ -1,0 +1,54 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+//TODO apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+
+group = 'org.interledger'
+version = '0.1.0-SNAPSHOT'
+description = "Simple in-memory interledger implementation"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Interledger Protocol Ledger Simple',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'org.interledger:java-ilp-core:0.0.1-alpha'
+    compile 'org.javamoney:moneta:1.1'
+}
+
+//Maven compatibility task:
+task writePom << {
+    pom {
+        project {
+            description project.description                        
+            inceptionYear '2016'            
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }  
+            developers {
+                developer {
+                    id "mrmx"
+                    name "Manuel Polo"
+                    email "mistermx@gmail.com"
+                }
+            }
+        }
+        
+    }.writeTo("pom.xml")
+}
