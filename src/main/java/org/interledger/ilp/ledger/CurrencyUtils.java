@@ -20,9 +20,10 @@ public class CurrencyUtils {
         return Currency.getInstance(currencyCode);
     }
 
+    //FIXME
     public static int getPrecision(CurrencyUnit currency) {
         MonetaryAmountFactory<?> amountFactory = Monetary.getDefaultAmountFactory();
-        MonetaryAmount amount = amountFactory.setCurrency(currency).create();
+        MonetaryAmount amount = amountFactory.setCurrency(currency).setNumber(0).create();
         return amount.getNumber().getPrecision();        
     }
     
