@@ -1,6 +1,8 @@
 package org.interledger.ilp.ledger;
 
 import java.util.Currency;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 
 /**
  * Common used currencies 
@@ -21,6 +23,11 @@ public enum Currencies {
         this.code = code;
     }
 
+    public String code() {
+        return code;
+    }  
+    
+    
     public String getCode() {
         return code;
     }  
@@ -28,4 +35,8 @@ public enum Currencies {
     public Currency toCurrency() {
         return Currency.getInstance(code);
     }    
+    
+    public CurrencyUnit toCurrencyUnit() {
+        return Monetary.getCurrency(code);
+    }        
 }
