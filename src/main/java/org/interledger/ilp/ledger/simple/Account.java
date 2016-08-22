@@ -54,6 +54,14 @@ public class Account {
         return balance;
     }
     
+    public String getBalanceAsString() {
+        return getBalanceAsNumber().toString();
+    }
+
+    public Number getBalanceAsNumber() {
+        return getBalance().getNumber();
+    }
+    
     public Account credit(String amount) {
         return credit(toMonetaryAmount(amount));
     }
