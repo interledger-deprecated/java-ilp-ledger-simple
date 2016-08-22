@@ -5,18 +5,17 @@ import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
 /**
- * Common used currencies 
- * 
+ * Common used currencies
+ *
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public enum Currencies {
     EURO("EUR"),
     US_DOLLAR("USD"),
-    POUND("GBP"),    
+    POUND("GBP"),
     YEN("JPY"),
-    YUAN("CNY")
-    ;
-    
+    YUAN("CNY");
+
     private String code;
 
     private Currencies(String code) {
@@ -25,18 +24,17 @@ public enum Currencies {
 
     public String code() {
         return code;
-    }  
-    
-    
+    }
+
     public String getCode() {
         return code;
-    }  
-    
+    }
+
     public Currency toCurrency() {
         return Currency.getInstance(code);
-    }    
-    
+    }
+
     public CurrencyUnit toCurrencyUnit() {
         return Monetary.getCurrency(code);
-    }        
+    }
 }

@@ -14,24 +14,25 @@ import org.junit.Ignore;
 
 /**
  * Simple ledger tests
- * 
+ *
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public class SimpleLedgerTest {
+
     Currencies CURRENCY = Currencies.EURO;
     SimpleLedger instance;
-    
+
     @Before
     public void setUp() {
         instance = new SimpleLedger(CURRENCY);
-    }    
+    }
 
     /**
      * Test of addAccount method, of class SimpleLedger.
      */
     @Test
     public void testAddAccount() {
-        System.out.println("addAccount");        
+        System.out.println("addAccount");
         instance.addAccount(new Account("test", CURRENCY.code()));
     }
 
@@ -42,7 +43,7 @@ public class SimpleLedgerTest {
     public void testGetAcccount() {
         System.out.println("getAcccount");
         String name = "test";
-        instance.addAccount(new Account("test", CURRENCY.code()));                        
+        instance.addAccount(new Account("test", CURRENCY.code()));
         Account result = instance.getAcccount(name);
         assertNotNull(result);
         assertEquals(name, result.getName());
@@ -65,16 +66,15 @@ public class SimpleLedgerTest {
     @Test
     public void testSend() {
         System.out.println("send");
-		Account alice = new Account("alice", CURRENCY.code()).setBalance(100);
-		Account bob = new Account("bob", CURRENCY.code()).setBalance(100);
-		instance.addAccounts(alice,bob);
+        Account alice = new Account("alice", CURRENCY.code()).setBalance(100);
+        Account bob = new Account("bob", CURRENCY.code()).setBalance(100);
+        instance.addAccounts(alice, bob);
         LedgerTransfer transfer = LedgerTransferBuilder.instance()
-				.destination("alice@ledger1")
-				.from(alice)
-				.to(bob)
-				.amount(Money.of(10, CURRENCY.code()))
-				.build()
-		;
+                .destination("alice@ledger1")
+                .from(alice)
+                .to(bob)
+                .amount(Money.of(10, CURRENCY.code()))
+                .build();
         instance.send(transfer);
     }
 
@@ -99,7 +99,7 @@ public class SimpleLedgerTest {
     public void testFulfillCondition() {
         System.out.println("fulfillCondition");
         Fullfilment fulfillment = null;
-        instance.fulfillCondition(fulfillment);        
+        instance.fulfillCondition(fulfillment);
         fail("The test case is a prototype.");
     }
 
@@ -110,9 +110,9 @@ public class SimpleLedgerTest {
     @Test
     public void testRegisterEventHandler() {
         System.out.println("registerEventHandler");
-        LedgerEventHandler handler = null;        
-        instance.registerEventHandler(handler);        
+        LedgerEventHandler handler = null;
+        instance.registerEventHandler(handler);
         fail("The test case is a prototype.");
     }
-    
+
 }

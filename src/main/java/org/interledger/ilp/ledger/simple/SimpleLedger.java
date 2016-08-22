@@ -35,12 +35,12 @@ public class SimpleLedger implements Ledger {
         accountMap = new HashMap<String, Account>();
     }
 
-	public void addAccounts(Account ... accounts) {
-		for(Account account : accounts) {
-			accountMap.put(account.getName(), account);
-		}
+    public void addAccounts(Account... accounts) {
+        for (Account account : accounts) {
+            accountMap.put(account.getName(), account);
+        }
     }
-	
+
     public void addAccount(Account account) {
         accountMap.put(account.getName(), account);
     }
@@ -55,11 +55,11 @@ public class SimpleLedger implements Ledger {
 
     public void send(LedgerTransfer transfer) {
         System.out.println("sending " + transfer);
-		Account from = getAcccount(transfer.getFromAccount());
-		if(from == null) {
-			throw new AccountNotFoundException(transfer.getFromAccount());
-		}
-		//WIP
+        Account from = getAcccount(transfer.getFromAccount());
+        if (from == null) {
+            throw new AccountNotFoundException(transfer.getFromAccount());
+        }
+        //WIP
     }
 
     public void rejectTransfer(LedgerTransfer transfer, LedgerTransferRejectedReason reason) {

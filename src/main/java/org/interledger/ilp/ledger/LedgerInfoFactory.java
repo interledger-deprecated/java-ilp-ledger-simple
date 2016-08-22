@@ -7,7 +7,7 @@ import org.interledger.ilp.core.LedgerInfo;
 
 /**
  * LedgerInfo factory
- * 
+ *
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public class LedgerInfoFactory {
@@ -22,10 +22,10 @@ public class LedgerInfoFactory {
     public static LedgerInfo getUSD() {
         return USD;
     }
-    
+
     public static LedgerInfo from(Currencies currency) {
         return from(currency.getCode());
-    }    
+    }
 
     public static LedgerInfo from(Currency currency) {
         return from(currency.getCurrencyCode());
