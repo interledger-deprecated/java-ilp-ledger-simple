@@ -18,13 +18,13 @@ import org.junit.Ignore;
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public class SimpleLedgerTest {
-
+    
     Currencies CURRENCY = Currencies.EURO;
     SimpleLedger instance;
 
     @Before
     public void setUp() {
-        instance = new SimpleLedger(CURRENCY);
+        instance = new SimpleLedger(CURRENCY,"test");
     }
 
     /**
@@ -69,13 +69,14 @@ public class SimpleLedgerTest {
         Account alice = new Account("alice", CURRENCY.code()).setBalance(100);
         Account bob = new Account("bob", CURRENCY.code()).setBalance(100);
         instance.addAccounts(alice, bob);
-        LedgerTransfer transfer = LedgerTransferBuilder.instance()
-                .destination("alice@ledger1")
-                .from(alice)
-                .to(bob)
+        LedgerTransfer transfer = LedgerTransferBuilder.instance()                
+                .from(alice)                
+                .destination("bob@test")
                 .amount(Money.of(10, CURRENCY.code()))
                 .build();
         instance.send(transfer);
+        assertEquals("90",instance.getAcccount("alice").getBalance().getNumber().toString());
+        assertEquals("110",instance.getAcccount("bob").getBalance().getNumber().toString());
     }
 
     /**

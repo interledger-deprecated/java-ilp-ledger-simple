@@ -12,6 +12,9 @@ import javax.money.MonetaryAmountFactory;
  */
 public class CurrencyUtils {
 
+    private CurrencyUtils() {
+    }
+
     public static String getSymbol(String currencyCode) {
         return toCurrency(currencyCode).getSymbol();
     }

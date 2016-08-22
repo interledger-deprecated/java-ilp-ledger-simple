@@ -13,7 +13,8 @@ import org.interledger.ilp.core.exceptions.InsufficientAmountException;
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public class LedgerTransferBuilder {
-
+    
+    private LedgerAddressParser ledgerAddressParser;
     private String destinationAddress;
     private String from, to;
     private MonetaryAmount amount;
@@ -26,7 +27,12 @@ public class LedgerTransferBuilder {
     }
 
     public static LedgerTransferBuilder instance() {
-        return new LedgerTransferBuilder();
+        return new LedgerTransferBuilder().withLedgerAddressParser(new SimpleLedgerAddressParser());
+    }
+
+    public LedgerTransferBuilder withLedgerAddressParser(LedgerAddressParser ledgerAddressParser) {
+        this.ledgerAddressParser = ledgerAddressParser;
+        return this;
     }
 
     public LedgerTransferBuilder destination(String destinationAddress) {
@@ -85,12 +91,16 @@ public class LedgerTransferBuilder {
         }
         if (!amount.isPositive()) {
             throw new InsufficientAmountException(amount.toString());
-        }
+        }        
         LedgerTransferImpl ledgerTransfer = new LedgerTransferImpl();
         ledgerTransfer.destinationAddress = destinationAddress;
         ledgerTransfer.from = from;
+        if(to == null) {
+            ledgerAddressParser.parse(destinationAddress);
+            to = ledgerAddressParser.getAccountName();
+        }
         ledgerTransfer.to = to;
-        ledgerTransfer.amount = amount.toString();
+        ledgerTransfer.amount = amount.getNumber().toString();
         ledgerTransfer.data = data;
         ledgerTransfer.note = note;
         ledgerTransfer.condition = condition;

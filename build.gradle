@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.interledger:java-ilp-core:0.0.1-alpha'
+    compile 'org.interledger:java-ilp-core:0.1.1-SNAPSHOT'
     compile 'org.javamoney:moneta:1.1'
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.3'

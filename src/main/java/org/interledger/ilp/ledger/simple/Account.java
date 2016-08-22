@@ -1,8 +1,10 @@
 package org.interledger.ilp.ledger.simple;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import org.interledger.ilp.ledger.MoneyUtils;
 import org.javamoney.moneta.Money;
 
 /**
@@ -51,31 +53,54 @@ public class Account {
         }
         return balance;
     }
-
-    public Account add(Number amount) {
-        return add(Money.of(amount, currencyCode));
+    
+    public Account credit(String amount) {
+        return credit(toMonetaryAmount(amount));
     }
 
-    public Account add(MonetaryAmount amount) {
+    public Account credit(Number amount) {
+        return credit(Money.of(amount, currencyCode));
+    }
+
+    public Account credit(MonetaryAmount amount) {
         setBalance(getBalance().add(amount));
         return this;
     }
 
-    public Account sub(Number amount) {
-        return sub(Money.of(amount, currencyCode));
+    public Account debit(String amount) {
+        return debit(toMonetaryAmount(amount));
+    }
+    
+    public Account debit(Number amount) {
+        return debit(Money.of(amount, currencyCode));
     }
 
-    public Account sub(MonetaryAmount amount) {
+    public Account debit(MonetaryAmount amount) {
         setBalance(getBalance().subtract(amount));
         return this;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null || !(obj instanceof Account)) {
+            return false;
+        }
+        if(obj == this) {
+            return true;
+        }
+        return name.equalsIgnoreCase(((Account)obj).getName());
+    }
+    
     @Override
     public String toString() {
         return "Account["
                 + "name:" + name
                 + " balance:" + balance
                 + "]";
+    }
+
+    protected MonetaryAmount toMonetaryAmount(String amount) {
+        return MoneyUtils.toMonetaryAmount(amount, currencyCode);
     }
 
 }
