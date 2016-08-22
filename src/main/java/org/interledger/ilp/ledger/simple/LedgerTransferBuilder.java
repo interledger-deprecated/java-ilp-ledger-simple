@@ -2,6 +2,7 @@ package org.interledger.ilp.ledger.simple;
 
 import java.util.Date;
 import javax.money.MonetaryAmount;
+import org.apache.commons.lang.StringUtils;
 import org.interledger.cryptoconditions.Condition;
 import org.interledger.ilp.core.InterledgerPacketHeader;
 import org.interledger.ilp.core.LedgerTransfer;
@@ -95,7 +96,7 @@ public class LedgerTransferBuilder {
         LedgerTransferImpl ledgerTransfer = new LedgerTransferImpl();
         ledgerTransfer.destinationAddress = destinationAddress;
         ledgerTransfer.from = from;
-        if(to == null) {
+        if(StringUtils.isEmpty(to)) {
             ledgerAddressParser.parse(destinationAddress);
             to = ledgerAddressParser.getAccountName();
         }

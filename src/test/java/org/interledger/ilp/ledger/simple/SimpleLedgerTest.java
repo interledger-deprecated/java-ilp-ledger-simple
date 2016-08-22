@@ -75,8 +75,8 @@ public class SimpleLedgerTest {
                 .amount(Money.of(10, CURRENCY.code()))
                 .build();
         instance.send(transfer);
-        assertEquals("90",instance.getAcccount("alice").getBalance().getNumber().toString());
-        assertEquals("110",instance.getAcccount("bob").getBalance().getNumber().toString());
+        assertEquals(90,instance.getAcccount("alice").getBalanceAsNumber().intValue());
+        assertEquals(110,instance.getAcccount("bob").getBalanceAsNumber().intValue());
     }
 
     /**

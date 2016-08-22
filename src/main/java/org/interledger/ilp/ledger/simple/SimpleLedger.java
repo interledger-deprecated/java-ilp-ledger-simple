@@ -1,6 +1,5 @@
 package org.interledger.ilp.ledger.simple;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import javax.money.MonetaryAmount;
@@ -14,7 +13,6 @@ import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
-import org.javamoney.moneta.Money;
 
 /**
  * Simple in-memory ledger implementation

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import org.apache.commons.lang.StringUtils;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.javamoney.moneta.Money;
 
@@ -27,7 +28,7 @@ public class Account {
     }
 
     public Account(String name, String currencyCode) {
-        if (name == null || name.trim().length() == 0) {
+        if (StringUtils.isEmpty(name)) {
             throw new IllegalArgumentException("empty account name");
         }
         this.name = name;
