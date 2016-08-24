@@ -3,7 +3,7 @@ package org.interledger.ilp.ledger.simple;
 import java.util.HashMap;
 import java.util.Map;
 import javax.money.MonetaryAmount;
-import org.interledger.cryptoconditions.Fullfilment;
+import org.interledger.cryptoconditions.Fulfillment;
 import org.interledger.ilp.core.Ledger;
 import org.interledger.ilp.core.LedgerInfo;
 import org.interledger.ilp.core.LedgerTransfer;
@@ -25,15 +25,15 @@ public class SimpleLedger implements Ledger {
     private String name;
     private Map<String, Account> accountMap;
 
-    public SimpleLedger(Currencies currency,String name) {
-        this(LedgerInfoFactory.from(currency),name);
+    public SimpleLedger(Currencies currency, String name) {
+        this(LedgerInfoFactory.from(currency), name);
     }
 
-    public SimpleLedger(String currencyCode,String name) {
-        this(LedgerInfoFactory.from(currencyCode),name);
+    public SimpleLedger(String currencyCode, String name) {
+        this(LedgerInfoFactory.from(currencyCode), name);
     }
 
-    public SimpleLedger(LedgerInfo info,String name) {
+    public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
         accountMap = new HashMap<String, Account>();
@@ -60,8 +60,8 @@ public class SimpleLedger implements Ledger {
     public String getName() {
         return name;
     }
-    
-    public void send(LedgerTransfer transfer) {        
+
+    public void send(LedgerTransfer transfer) {
         Account from = getAcccount(transfer.getFromAccount());
         if (from == null) {
             throw new AccountNotFoundException(transfer.getFromAccount());
@@ -70,11 +70,11 @@ public class SimpleLedger implements Ledger {
         if (to == null) {
             throw new AccountNotFoundException(transfer.getToAccount());
         }
-        if(to.equals(from)) {
+        if (to.equals(from)) {
             throw new RuntimeException("accounts are the same");
         }
-        MonetaryAmount amount = MoneyUtils.toMonetaryAmount(transfer.getAmount(),info.getCurrencyCode());        
-        if(from.getBalance().isGreaterThanOrEqualTo(amount)) {
+        MonetaryAmount amount = MoneyUtils.toMonetaryAmount(transfer.getAmount(), info.getCurrencyCode());
+        if (from.getBalance().isGreaterThanOrEqualTo(amount)) {
             from.debit(amount);
             to.credit(amount);
         } else {
@@ -86,7 +86,7 @@ public class SimpleLedger implements Ledger {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void fulfillCondition(Fullfilment fulfillment) {
+    public void fulfillCondition(Fulfillment fulfillment) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

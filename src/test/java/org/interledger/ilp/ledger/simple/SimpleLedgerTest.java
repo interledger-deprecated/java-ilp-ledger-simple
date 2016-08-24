@@ -1,6 +1,6 @@
 package org.interledger.ilp.ledger.simple;
 
-import org.interledger.cryptoconditions.Fullfilment;
+import org.interledger.cryptoconditions.Fulfillment;
 import org.interledger.ilp.core.LedgerInfo;
 import org.interledger.ilp.core.LedgerTransfer;
 import org.interledger.ilp.core.LedgerTransferRejectedReason;
@@ -18,13 +18,13 @@ import org.junit.Ignore;
  * @author Manuel Polo <mistermx@gmail.com>
  */
 public class SimpleLedgerTest {
-    
+
     Currencies CURRENCY = Currencies.EURO;
     SimpleLedger instance;
 
     @Before
     public void setUp() {
-        instance = new SimpleLedger(CURRENCY,"test");
+        instance = new SimpleLedger(CURRENCY, "test");
     }
 
     /**
@@ -69,14 +69,14 @@ public class SimpleLedgerTest {
         Account alice = new Account("alice", CURRENCY.code()).setBalance(100);
         Account bob = new Account("bob", CURRENCY.code()).setBalance(100);
         instance.addAccounts(alice, bob);
-        LedgerTransfer transfer = LedgerTransferBuilder.instance()                
-                .from(alice)                
+        LedgerTransfer transfer = LedgerTransferBuilder.instance()
+                .from(alice)
                 .destination("bob@test")
                 .amount(Money.of(10, CURRENCY.code()))
                 .build();
         instance.send(transfer);
-        assertEquals(90,instance.getAcccount("alice").getBalanceAsNumber().intValue());
-        assertEquals(110,instance.getAcccount("bob").getBalanceAsNumber().intValue());
+        assertEquals(90, instance.getAcccount("alice").getBalanceAsNumber().intValue());
+        assertEquals(110, instance.getAcccount("bob").getBalanceAsNumber().intValue());
     }
 
     /**
@@ -99,7 +99,7 @@ public class SimpleLedgerTest {
     @Test
     public void testFulfillCondition() {
         System.out.println("fulfillCondition");
-        Fullfilment fulfillment = null;
+        Fulfillment fulfillment = null;
         instance.fulfillCondition(fulfillment);
         fail("The test case is a prototype.");
     }
