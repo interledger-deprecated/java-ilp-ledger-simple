@@ -1,6 +1,5 @@
 package org.interledger.ilp.ledger.simple;
 
-import java.math.BigDecimal;
 import java.util.Currency;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
