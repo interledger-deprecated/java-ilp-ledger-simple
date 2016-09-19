@@ -1,9 +1,9 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 /**
  * Parses addresses into account and ledger
  * 
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 interface LedgerAddressParser {
    void parse(String address) throws LedgerAddressParserException;

@@ -7,7 +7,7 @@ import javax.money.Monetary;
 /**
  * Common used currencies
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public enum Currencies {
     EURO("EUR"),

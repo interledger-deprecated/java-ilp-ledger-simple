@@ -1,5 +1,8 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
+import org.interledger.ilp.ledger.impl.LedgerTransferBuilder;
+import org.interledger.ilp.ledger.impl.SimpleLedger;
+import org.interledger.ilp.ledger.impl.Account;
 import org.interledger.cryptoconditions.Fulfillment;
 import org.interledger.ilp.core.LedgerInfo;
 import org.interledger.ilp.core.LedgerTransfer;
@@ -7,15 +10,15 @@ import org.interledger.ilp.core.LedgerTransferRejectedReason;
 import org.interledger.ilp.core.events.LedgerEventHandler;
 import org.interledger.ilp.ledger.Currencies;
 import org.javamoney.moneta.Money;
-import org.junit.Before;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Simple ledger tests
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class SimpleLedgerTest {
 

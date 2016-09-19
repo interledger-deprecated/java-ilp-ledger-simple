@@ -8,7 +8,7 @@ import org.interledger.ilp.core.LedgerInfo;
 /**
  * LedgerInfo factory
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class LedgerInfoFactory {
 

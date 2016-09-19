@@ -1,4 +1,4 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 import java.util.Date;
 import javax.money.MonetaryAmount;
@@ -11,7 +11,7 @@ import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 /**
  * LedgerTransfer builder
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class LedgerTransferBuilder {
     

@@ -1,4 +1,4 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 import java.util.Currency;
 import javax.money.CurrencyUnit;
@@ -10,7 +10,7 @@ import org.javamoney.moneta.Money;
 /**
  * Represents a ledger account
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class Account {
 
