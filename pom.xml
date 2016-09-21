@@ -26,6 +26,13 @@
       <id>mrmx</id>
       <name>Manuel Polo</name>
       <email>mistermx@gmail.com</email>
+      <organizationUrl>http://www.everis.com</organizationUrl>
+    </developer>
+    <developer>
+      <id>earizon</id>
+      <name>Enrique Arizón Benito</name>
+      <email>enrique.arizon.benito@everis.com</email>
+      <organizationUrl>http://www.everis.com</organizationUrl>
     </developer>
   </developers>
   <properties>

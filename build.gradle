@@ -1,10 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-//TODO apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
 group = 'org.interledger'
-version = '0.1.0-SNAPSHOT'
+version = '0.1.2-SNAPSHOT'
 description = "Simple in-memory interledger implementation"
 
 sourceCompatibility = 1.6
@@ -54,6 +53,13 @@ task writePom << {
                     id "mrmx"
                     name "Manuel Polo"
                     email "mistermx@gmail.com"
+                    organizationUrl "http://www.everis.com"
+                }
+                developer {
+                    id "earizon"
+                    name "Enrique Arizón Benito"
+                    email "enrique.arizon.benito@everis.com"
+                    organizationUrl "http://www.everis.com"
                 }
             }
         }

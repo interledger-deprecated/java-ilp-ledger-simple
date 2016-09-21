@@ -6,7 +6,7 @@ import org.javamoney.moneta.Money;
 
 /**
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class MoneyUtils {
 

@@ -1,10 +1,10 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 import org.interledger.ilp.core.exceptions.InterledgerException;
 
 /**
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class LedgerAddressParserException extends InterledgerException {
 
