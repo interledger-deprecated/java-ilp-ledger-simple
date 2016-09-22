@@ -1,10 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-//TODO apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
 group = 'org.interledger'
-version = '0.1.0-SNAPSHOT'
+version = java_ilp_ledger_simple_version
 description = "Simple in-memory interledger implementation"
 
 sourceCompatibility = 1.6
@@ -24,11 +23,11 @@ repositories {
 }
 
 dependencies {
-    compile 'org.interledger:java-ilp-core:0.1.1-SNAPSHOT'
-    compile 'org.javamoney:moneta:1.1'
-    compile 'commons-lang:commons-lang:2.6'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.hamcrest:hamcrest-core:1.3'    
+    compile     "org.interledger:java-ilp-core:${java_ilp_core_version}"
+    compile     "org.javamoney:moneta:${moneta_version}"
+    compile     "commons-lang:commons-lang:${commons_lang_version}"
+    testCompile "junit:junit:${junit_version}"
+    testCompile "org.hamcrest:hamcrest-core:${hamcrest_core_version}"
 }
 
 //Maven compatibility task:
@@ -54,6 +53,13 @@ task writePom << {
                     id "mrmx"
                     name "Manuel Polo"
                     email "mistermx@gmail.com"
+                    organizationUrl "http://www.everis.com"
+                }
+                developer {
+                    id "earizon"
+                    name "Enrique Arizón Benito"
+                    email "enrique.arizon.benito@everis.com"
+                    organizationUrl "http://www.everis.com"
                 }
             }
         }
