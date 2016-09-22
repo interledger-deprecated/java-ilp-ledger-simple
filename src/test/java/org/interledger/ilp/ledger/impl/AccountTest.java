@@ -1,15 +1,16 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
+import org.interledger.ilp.ledger.impl.Account;
 import javax.money.MonetaryAmount;
 import org.javamoney.moneta.Money;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Account tests
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class AccountTest {
 

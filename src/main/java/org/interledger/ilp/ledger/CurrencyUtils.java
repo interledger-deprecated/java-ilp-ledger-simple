@@ -8,7 +8,7 @@ import javax.money.MonetaryAmountFactory;
 
 /**
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class CurrencyUtils {
 

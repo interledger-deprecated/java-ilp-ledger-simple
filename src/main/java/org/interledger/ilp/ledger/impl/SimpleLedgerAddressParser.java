@@ -1,11 +1,11 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 import org.apache.commons.lang.StringUtils;
 
 /**
  * Simple local account address parser
  * 
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class SimpleLedgerAddressParser implements LedgerAddressParser {
     private final static String DEFAULT_LEDGER_HOST_ACCOUNT_SEPARATOR = "@";

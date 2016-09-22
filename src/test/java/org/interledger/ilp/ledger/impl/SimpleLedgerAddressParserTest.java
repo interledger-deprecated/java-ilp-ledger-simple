@@ -1,13 +1,15 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
+import org.interledger.ilp.ledger.impl.LedgerAddressParserException;
+import org.interledger.ilp.ledger.impl.SimpleLedgerAddressParser;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * SimpleLedgerAddressParser tests
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class SimpleLedgerAddressParserTest {
 

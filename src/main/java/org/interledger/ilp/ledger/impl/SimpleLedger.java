@@ -1,4 +1,4 @@
-package org.interledger.ilp.ledger.simple;
+package org.interledger.ilp.ledger.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import org.interledger.ilp.ledger.MoneyUtils;
 /**
  * Simple in-memory ledger implementation
  *
- * @author Manuel Polo <mistermx@gmail.com>
+ * @author mrmx
  */
 public class SimpleLedger implements Ledger {
 
