@@ -1,6 +1,6 @@
 package org.interledger.ilp.ledger.impl;
 
-import org.interledger.ilp.ledger.impl.Account;
+import org.interledger.ilp.ledger.impl.SimpleLedgerAccount;
 import javax.money.MonetaryAmount;
 import org.javamoney.moneta.Money;
 import static org.junit.Assert.*;
@@ -8,22 +8,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Account tests
+ * SimpleLedgerAccount tests
  *
  * @author mrmx
  */
-public class AccountTest {
+public class SimpleLedgerAccountTest {
 
     static final String CURRENCY_CODE = "EUR";
-    Account instance;
+    SimpleLedgerAccount instance;
 
     @Before
     public void setUp() {
-        instance = new Account("test", CURRENCY_CODE);
+        instance = new SimpleLedgerAccount("test", CURRENCY_CODE);
     }
 
     /**
-     * Test of getName method, of class Account.
+     * Test of getName method, of class SimpleLedgerAccount.
      */
     @Test
     public void testGetName() {
@@ -34,7 +34,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of setBalance method, of class Account.
+     * Test of setBalance method, of class SimpleLedgerAccount.
      */
     @Test
     public void testSetBalance_Number() {
@@ -46,7 +46,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of setBalance method, of class Account.
+     * Test of setBalance method, of class SimpleLedgerAccount.
      */
     @Test
     public void testSetBalance_MonetaryAmount() {
@@ -58,7 +58,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of getBalance method, of class Account.
+     * Test of getBalance method, of class SimpleLedgerAccount.
      */
     @Test
     public void testGetBalance() {
@@ -69,7 +69,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of credit method, of class Account.
+     * Test of credit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testCredit_String() {
@@ -81,7 +81,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of credit method, of class Account.
+     * Test of credit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testCredit_Number() {
@@ -93,7 +93,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of credit method, of class Account.
+     * Test of credit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testCredit_MonetaryAmount() {
@@ -105,7 +105,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of debit method, of class Account.
+     * Test of debit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testDebit_String() {
@@ -118,7 +118,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of debit method, of class Account.
+     * Test of debit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testDebit_Number() {
@@ -131,7 +131,7 @@ public class AccountTest {
     }
 
     /**
-     * Test of debit method, of class Account.
+     * Test of debit method, of class SimpleLedgerAccount.
      */
     @Test
     public void testDebit_MonetaryAmount() {
@@ -144,12 +144,12 @@ public class AccountTest {
     }
 
     /**
-     * Test of equals method, of class Account.
+     * Test of equals method, of class SimpleLedgerAccount.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Account other = new Account("other", CURRENCY_CODE);
+        SimpleLedgerAccount other = new SimpleLedgerAccount("other", CURRENCY_CODE);
         assertNotEquals(instance, other);
         assertNotEquals(instance, null);
         assertEquals(instance, instance);

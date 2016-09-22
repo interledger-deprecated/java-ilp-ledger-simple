@@ -1,7 +1,5 @@
 package org.interledger.ilp.ledger.impl;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.money.MonetaryAmount;
 import org.interledger.cryptoconditions.Fulfillment;
 import org.interledger.ilp.core.Ledger;
@@ -13,17 +11,20 @@ import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
+import org.interledger.ilp.ledger.account.LedgerAccount;
+import org.interledger.ilp.ledger.account.LedgerAccountManager;
+import org.interledger.ilp.ledger.account.LedgerAccountManagerAware;
 
 /**
  * Simple in-memory ledger implementation
  *
  * @author mrmx
  */
-public class SimpleLedger implements Ledger {
+public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
 
     private LedgerInfo info;
     private String name;
-    private Map<String, Account> accountMap;
+    private SimpleLedgerAccountManager accountManager;
 
     public SimpleLedger(Currencies currency, String name) {
         this(LedgerInfoFactory.from(currency), name);
@@ -36,21 +37,12 @@ public class SimpleLedger implements Ledger {
     public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
-        accountMap = new HashMap<String, Account>();
+        accountManager = new SimpleLedgerAccountManager();
     }
 
-    public void addAccounts(Account... accounts) {
-        for (Account account : accounts) {
-            accountMap.put(account.getName(), account);
-        }
-    }
-
-    public void addAccount(Account account) {
-        accountMap.put(account.getName(), account);
-    }
-
-    public Account getAcccount(String name) {
-        return accountMap.get(name);
+    @Override
+    public LedgerAccountManager getLedgerAccountManager() {
+        return accountManager;
     }
 
     public LedgerInfo getInfo() {
@@ -62,14 +54,8 @@ public class SimpleLedger implements Ledger {
     }
 
     public void send(LedgerTransfer transfer) {
-        Account from = getAcccount(transfer.getFromAccount());
-        if (from == null) {
-            throw new AccountNotFoundException(transfer.getFromAccount());
-        }
-        Account to = getAcccount(transfer.getToAccount());
-        if (to == null) {
-            throw new AccountNotFoundException(transfer.getToAccount());
-        }
+        LedgerAccount from = accountManager.getAccountByName(transfer.getFromAccount());
+        LedgerAccount to = accountManager.getAccountByName(transfer.getToAccount());
         if (to.equals(from)) {
             throw new RuntimeException("accounts are the same");
         }

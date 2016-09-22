@@ -7,6 +7,7 @@ import org.interledger.cryptoconditions.Condition;
 import org.interledger.ilp.core.InterledgerPacketHeader;
 import org.interledger.ilp.core.LedgerTransfer;
 import org.interledger.ilp.core.exceptions.InsufficientAmountException;
+import org.interledger.ilp.ledger.account.LedgerAccount;
 
 /**
  * LedgerTransfer builder
@@ -41,7 +42,7 @@ public class LedgerTransferBuilder {
         return this;
     }
 
-    public LedgerTransferBuilder from(Account from) {
+    public LedgerTransferBuilder from(LedgerAccount from) {
         this.from = from.getName();
         return this;
     }
@@ -51,7 +52,7 @@ public class LedgerTransferBuilder {
         return this;
     }
 
-    public LedgerTransferBuilder to(Account to) {
+    public LedgerTransferBuilder to(LedgerAccount to) {
         this.to = to.getName();
         return this;
     }

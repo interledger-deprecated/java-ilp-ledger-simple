@@ -1,14 +1,12 @@
 package org.interledger.ilp.ledger.impl;
 
-import org.interledger.ilp.ledger.impl.LedgerTransferBuilder;
-import org.interledger.ilp.ledger.impl.SimpleLedger;
-import org.interledger.ilp.ledger.impl.Account;
 import org.interledger.cryptoconditions.Fulfillment;
 import org.interledger.ilp.core.LedgerInfo;
 import org.interledger.ilp.core.LedgerTransfer;
 import org.interledger.ilp.core.LedgerTransferRejectedReason;
 import org.interledger.ilp.core.events.LedgerEventHandler;
 import org.interledger.ilp.ledger.Currencies;
+import org.interledger.ilp.ledger.account.LedgerAccount;
 import org.javamoney.moneta.Money;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -31,29 +29,6 @@ public class SimpleLedgerTest {
     }
 
     /**
-     * Test of addAccount method, of class SimpleLedger.
-     */
-    @Test
-    public void testAddAccount() {
-        System.out.println("addAccount");
-        instance.addAccount(new Account("test", CURRENCY.code()));
-    }
-
-    /**
-     * Test of getAcccount method, of class SimpleLedger.
-     */
-    @Test
-    public void testGetAcccount() {
-        System.out.println("getAcccount");
-        String name = "test";
-        instance.addAccount(new Account("test", CURRENCY.code()));
-        Account result = instance.getAcccount(name);
-        assertNotNull(result);
-        assertEquals(name, result.getName());
-        assertTrue(result.getBalance().isZero());
-    }
-
-    /**
      * Test of getInfo method, of class SimpleLedger.
      */
     @Test
@@ -69,17 +44,18 @@ public class SimpleLedgerTest {
     @Test
     public void testSend() {
         System.out.println("send");
-        Account alice = new Account("alice", CURRENCY.code()).setBalance(100);
-        Account bob = new Account("bob", CURRENCY.code()).setBalance(100);
-        instance.addAccounts(alice, bob);
+        LedgerAccount alice = new SimpleLedgerAccount("alice", CURRENCY.code()).setBalance(100);
+        LedgerAccount bob = new SimpleLedgerAccount("bob", CURRENCY.code()).setBalance(100);
+        instance.getLedgerAccountManager().addAccount(alice);
+        instance.getLedgerAccountManager().addAccount(bob);
         LedgerTransfer transfer = LedgerTransferBuilder.instance()
                 .from(alice)
                 .destination("bob@test")
                 .amount(Money.of(10, CURRENCY.code()))
                 .build();
         instance.send(transfer);
-        assertEquals(90, instance.getAcccount("alice").getBalanceAsNumber().intValue());
-        assertEquals(110, instance.getAcccount("bob").getBalanceAsNumber().intValue());
+        assertEquals(90, instance.getLedgerAccountManager().getAccountByName("alice").getBalanceAsNumber().intValue());
+        assertEquals(110, instance.getLedgerAccountManager().getAccountByName("bob").getBalanceAsNumber().intValue());
     }
 
     /**
