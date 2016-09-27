@@ -37,7 +37,7 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
     public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
-        accountManager = new SimpleLedgerAccountManager();
+        accountManager = new SimpleLedgerAccountManager(info);
     }
 
     @Override

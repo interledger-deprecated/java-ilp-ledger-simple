@@ -41,6 +41,11 @@ public class SimpleLedgerAccount implements LedgerAccount {
     }
 
     @Override
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    @Override
     public SimpleLedgerAccount setBalance(Number balance) {
         return setBalance(Money.of(balance, currencyCode));
     }
