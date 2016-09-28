@@ -90,7 +90,7 @@ public class SimpleLedgerTest {
     @Test
     public void testRegisterEventHandler() {
         System.out.println("registerEventHandler");
-        LedgerEventHandler handler = null;
+        LedgerEventHandler<?> handler = null;
         instance.registerEventHandler(handler);
         fail("The test case is a prototype.");
     }

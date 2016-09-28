@@ -8,6 +8,8 @@ import org.interledger.ilp.core.exceptions.InterledgerException;
  */
 public class LedgerAddressParserException extends InterledgerException {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs an instance of <code>LedgerAddressParserException</code> with
      * the specified detail message.

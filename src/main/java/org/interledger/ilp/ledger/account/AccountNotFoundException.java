@@ -8,6 +8,8 @@ import org.interledger.ilp.core.exceptions.InterledgerException;
  */
 public class AccountNotFoundException extends InterledgerException {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates a new instance of {@code AccountNotFoundException} without
      * detail message.
