@@ -9,6 +9,7 @@ import org.interledger.ilp.core.LedgerTransferRejectedReason;
 import org.interledger.ilp.core.events.LedgerEventHandler;
 import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
+import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.interledger.ilp.ledger.account.LedgerAccount;
@@ -24,8 +25,8 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
 
     private LedgerInfo info;
     private String name;
-    private SimpleLedgerAccountManager accountManager;
-
+//    private LedgerAccountManager accountManager;
+   
     public SimpleLedger(Currencies currency, String name) {
         this(LedgerInfoFactory.from(currency), name);
     }
@@ -37,13 +38,8 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
     public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
-        accountManager = new SimpleLedgerAccountManager(info);
     }
 
-    @Override
-    public LedgerAccountManager getLedgerAccountManager() {
-        return accountManager;
-    }
 
     public LedgerInfo getInfo() {
         return info;
@@ -54,6 +50,7 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
     }
 
     public void send(LedgerTransfer transfer) {
+    	LedgerAccountManager accountManager = LedgerAccountManagerFactory.getAccountManagerSingleton();
         LedgerAccount from = accountManager.getAccountByName(transfer.getFromAccount());
         LedgerAccount to = accountManager.getAccountByName(transfer.getToAccount());
         if (to.equals(from)) {
@@ -79,4 +76,10 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
     public void registerEventHandler(LedgerEventHandler<?> handler) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+	@Override
+	public LedgerAccountManager getLedgerAccountManager() {
+		// FIXME: Remove getLedgerAccountManager here and in parent interface
+		return LedgerAccountManagerFactory.getAccountManagerSingleton();
+	}
 }
