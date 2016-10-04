@@ -1,9 +1,9 @@
 package org.interledger.ilp.ledger.impl;
 
 import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.Map;
-import org.interledger.ilp.core.LedgerInfo;
 import org.interledger.ilp.ledger.LedgerFactory;
 import org.interledger.ilp.ledger.account.AccountNotFoundException;
 import org.interledger.ilp.ledger.account.LedgerAccount;

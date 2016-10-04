@@ -19,7 +19,7 @@ public class LedgerFactory {
     
     public static Ledger getLedger() {
     	if (simpleLedgerSingleton == null) {
-    		throw new RuntimeException("simpleLedgerSingleton == null. At startup "
+    		throw new RuntimeException("simpleLedgerSingleton is null. At startup "
     				+ "createLedgerSingleton(LedgerInfo ledgerInfo,String ledgerName) must be called to initialize the factory"); 
     	}
     	return simpleLedgerSingleton;

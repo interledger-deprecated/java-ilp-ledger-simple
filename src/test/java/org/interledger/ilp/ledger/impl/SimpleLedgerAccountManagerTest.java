@@ -1,9 +1,7 @@
 package org.interledger.ilp.ledger.impl;
 
 import java.util.Collection;
-import org.interledger.ilp.ledger.Currencies;
 import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
-import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.account.LedgerAccount;
 import org.interledger.ilp.ledger.account.LedgerAccountManager;
 
