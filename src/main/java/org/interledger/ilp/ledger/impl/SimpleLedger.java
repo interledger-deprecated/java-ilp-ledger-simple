@@ -9,6 +9,7 @@ import org.interledger.ilp.core.LedgerTransferRejectedReason;
 import org.interledger.ilp.core.events.LedgerEventHandler;
 import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
+import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.interledger.ilp.ledger.account.LedgerAccount;
@@ -24,8 +25,8 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
 
     private LedgerInfo info;
     private String name;
-    private SimpleLedgerAccountManager accountManager;
-
+    private LedgerAccountManager accountManager;
+   
     public SimpleLedger(Currencies currency, String name) {
         this(LedgerInfoFactory.from(currency), name);
     }
@@ -37,7 +38,7 @@ public class SimpleLedger implements Ledger, LedgerAccountManagerAware {
     public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
-        accountManager = new SimpleLedgerAccountManager(info);
+        accountManager = LedgerAccountManagerFactory.getAccountManagerSingleton();
     }
 
     @Override

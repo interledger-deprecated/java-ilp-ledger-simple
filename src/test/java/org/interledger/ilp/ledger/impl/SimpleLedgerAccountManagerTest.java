@@ -2,8 +2,11 @@ package org.interledger.ilp.ledger.impl;
 
 import java.util.Collection;
 import org.interledger.ilp.ledger.Currencies;
+import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.account.LedgerAccount;
+import org.interledger.ilp.ledger.account.LedgerAccountManager;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
@@ -15,11 +18,12 @@ import org.junit.Test;
  */
 public class SimpleLedgerAccountManagerTest {
     
-    SimpleLedgerAccountManager instance;
+    LedgerAccountManager instance;
     
     @Before
     public void setUp() {
-        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
+//        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
+    	instance = LedgerAccountManagerFactory.getAccountManagerSingleton();
     }
     
     /**
@@ -42,10 +46,8 @@ public class SimpleLedgerAccountManagerTest {
     public void testAddAccounts() {
         System.out.println("addAccounts");
         assertEquals(0,instance.getTotalAccounts());
-        instance.addAccounts(
-                new SimpleLedgerAccount("alice", "EUR"),
-                new SimpleLedgerAccount("bob", "EUR")
-        );
+        instance.addAccount(new SimpleLedgerAccount("alice", "EUR"));
+        instance.addAccount(new SimpleLedgerAccount("bob", "EUR"));
         assertEquals(2,instance.getTotalAccounts());
     }
 

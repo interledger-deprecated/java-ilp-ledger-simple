@@ -15,54 +15,43 @@ import org.interledger.ilp.ledger.account.LedgerAccountManager;
  */
 public class SimpleLedgerAccountManager implements LedgerAccountManager {
 
-    private LedgerInfo ledgerInfo;
-    private Map<String, LedgerAccount> accountMap;
+	private static SimpleLedger simpleLedger;
+	private Map<String, LedgerAccount> accountMap;
 
-    public SimpleLedgerAccountManager(LedgerInfo ledgerInfo) {
-        this.ledgerInfo = ledgerInfo;
-        accountMap = new HashMap<String, LedgerAccount>();
-    }
+	public SimpleLedgerAccountManager() {
+		accountMap = new HashMap<String, LedgerAccount>();
+	}
 
-    @Override
-    public LedgerInfo getLedgerInfo() {
-        return ledgerInfo;
-    }
 
-    @Override
-    public LedgerAccount create(String name) {
-        return new SimpleLedgerAccount(name, ledgerInfo.getCurrencyCode());
-    }
+	@Override
+	public LedgerAccount create(String name) {
+		return new SimpleLedgerAccount(name, simpleLedger.getInfo().getCurrencyCode());
+	}
 
-    public void addAccounts(SimpleLedgerAccount... accounts) {
-        for (SimpleLedgerAccount account : accounts) {
-            addAccount(account);
-        }
-    }
 
-    @Override
-    public void addAccount(LedgerAccount account) {
-        accountMap.put(account.getName(), account);
-    }
 
-    @Override
-    public LedgerAccount getAccountByName(String name) throws AccountNotFoundException {
-        if(!accountMap.containsKey(name)) {
-            throw new AccountNotFoundException(name);
-        }
-        return accountMap.get(name);
-    }
+	@Override
+	public void addAccount(LedgerAccount account) {
+		accountMap.put(account.getName(), account);
+	}
 
-    @Override
-    public Collection<LedgerAccount> getAccounts(int page, int pageSize) {
-        //TODO
-        return accountMap.values();
-    }
-    
-    
+	@Override
+	public LedgerAccount getAccountByName(String name) throws AccountNotFoundException {
+		if (!accountMap.containsKey(name)) {
+			throw new AccountNotFoundException(name);
+		}
+		return accountMap.get(name);
+	}
 
-    @Override
-    public int getTotalAccounts() {
-        return accountMap.size();
-    }
+	@Override
+	public Collection<LedgerAccount> getAccounts(int page, int pageSize) {
+		// TODO
+		return accountMap.values();
+	}
+
+	@Override
+	public int getTotalAccounts() {
+		return accountMap.size();
+	}
 
 }

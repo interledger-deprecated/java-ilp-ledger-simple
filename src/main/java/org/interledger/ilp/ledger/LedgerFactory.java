@@ -10,13 +10,23 @@ import org.interledger.ilp.ledger.impl.SimpleLedger;
  * @author mrmx
  */
 public class LedgerFactory {
-    private static final LedgerFactory instance = new LedgerFactory();
+    private static SimpleLedger simpleLedgerSingleton;
 
-    public static LedgerFactory getInstance() {
-        return instance;
+    public static Ledger initialize(LedgerInfo ledgerInfo,String ledgerName) {
+    	if (simpleLedgerSingleton!=null) return simpleLedgerSingleton;
+    	simpleLedgerSingleton = new SimpleLedger(ledgerInfo,ledgerName);
+    	return simpleLedgerSingleton;
     }
-        
-    public Ledger create(LedgerInfo ledgerInfo,String ledgerName) {
-        return new SimpleLedger(ledgerInfo,ledgerName);
-    }
+    
+    public static Ledger getLedger() {
+    	if (simpleLedgerSingleton!=null) {
+    		throw new RuntimeException("simpleLedgerSingleton == null. At startup "
+    				+ "createLedgerSingleton(LedgerInfo ledgerInfo,String ledgerName) must be called to initialize the factory"); 
+    	}
+    	return simpleLedgerSingleton;
+	}
 }
+    
+    
+    
+
