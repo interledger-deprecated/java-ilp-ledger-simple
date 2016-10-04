@@ -12,14 +12,13 @@ import org.interledger.ilp.ledger.impl.SimpleLedger;
 public class LedgerFactory {
     private static SimpleLedger simpleLedgerSingleton;
 
-    public static Ledger initialize(LedgerInfo ledgerInfo,String ledgerName) {
-    	if (simpleLedgerSingleton!=null) return simpleLedgerSingleton;
+    public static void initialize(LedgerInfo ledgerInfo,String ledgerName) {
+    	if (simpleLedgerSingleton!=null) return;
     	simpleLedgerSingleton = new SimpleLedger(ledgerInfo,ledgerName);
-    	return simpleLedgerSingleton;
     }
     
     public static Ledger getLedger() {
-    	if (simpleLedgerSingleton!=null) {
+    	if (simpleLedgerSingleton == null) {
     		throw new RuntimeException("simpleLedgerSingleton == null. At startup "
     				+ "createLedgerSingleton(LedgerInfo ledgerInfo,String ledgerName) must be called to initialize the factory"); 
     	}

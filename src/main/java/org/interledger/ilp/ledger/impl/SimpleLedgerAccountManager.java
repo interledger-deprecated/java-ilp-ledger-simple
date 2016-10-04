@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.interledger.ilp.core.LedgerInfo;
+import org.interledger.ilp.ledger.LedgerFactory;
 import org.interledger.ilp.ledger.account.AccountNotFoundException;
 import org.interledger.ilp.ledger.account.LedgerAccount;
 import org.interledger.ilp.ledger.account.LedgerAccountManager;
@@ -14,8 +15,6 @@ import org.interledger.ilp.ledger.account.LedgerAccountManager;
  * @author mrmx
  */
 public class SimpleLedgerAccountManager implements LedgerAccountManager {
-
-	private static SimpleLedger simpleLedger;
 	private Map<String, LedgerAccount> accountMap;
 
 	public SimpleLedgerAccountManager() {
@@ -25,10 +24,8 @@ public class SimpleLedgerAccountManager implements LedgerAccountManager {
 
 	@Override
 	public LedgerAccount create(String name) {
-		return new SimpleLedgerAccount(name, simpleLedger.getInfo().getCurrencyCode());
+		return new SimpleLedgerAccount(name, LedgerFactory.getLedger().getInfo().getCurrencyCode());
 	}
-
-
 
 	@Override
 	public void addAccount(LedgerAccount account) {
