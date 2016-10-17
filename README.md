@@ -1,3 +1,3 @@
-Simple in-memory interledger implementation
+### DEPRECATED REPO
 
-WIP
+Go to https://github.com/everis-innolab/java-ilp-master
