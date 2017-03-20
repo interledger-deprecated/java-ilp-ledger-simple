@@ -1,6 +1,7 @@
 package org.interledger.ilp.ledger.account;
 
 import javax.money.CurrencyUnit;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.money.MonetaryAmount;
 
 import org.interledger.ilp.core.InterledgerAddress;
@@ -26,6 +27,7 @@ public interface LedgerAccount {
 
     MonetaryAmount getBalance();
 
+    @JsonProperty("balance")
     String getBalanceAsString();
 
     Number getBalanceAsNumber();

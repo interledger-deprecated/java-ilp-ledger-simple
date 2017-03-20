@@ -31,5 +31,4 @@ public class SimpleLedgerTest {
         LedgerInfo result = instance.getInfo();
         assertNotNull(result);
     }
-
 }

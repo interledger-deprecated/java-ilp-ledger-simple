@@ -6,6 +6,7 @@ import org.interledger.ilp.core.ledger.model.LedgerTransfer;
 
 import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
+import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.interledger.ilp.ledger.account.LedgerAccount;
@@ -19,8 +20,8 @@ public class SimpleLedger /* implements Ledger, TODO:(0) Still pertinent???. Wha
 
     private LedgerInfo info;
     private String name;
-    private SimpleLedgerAccountManager accountManager;
-
+      private LedgerAccountManager accountManager;
+   
     public SimpleLedger(Currencies currency, String name) {
         this(org.interledger.ilp.ledger.LedgerInfoFactory.from(currency), name);
     }
@@ -32,7 +33,6 @@ public class SimpleLedger /* implements Ledger, TODO:(0) Still pertinent???. Wha
     public SimpleLedger(LedgerInfo info, String name) {
         this.info = info;
         this.name = name;
-        accountManager = new SimpleLedgerAccountManager(info);
     }
 
     public LedgerAccountManager getLedgerAccountManager() {
@@ -48,6 +48,7 @@ public class SimpleLedger /* implements Ledger, TODO:(0) Still pertinent???. Wha
     }
 
     public void send(LedgerTransfer transfer) {
+    	LedgerAccountManager accountManager = LedgerAccountManagerFactory.getAccountManagerSingleton();
         LedgerAccount from = accountManager.getAccountByILPAddress(transfer.getFromAccount());
         LedgerAccount to = accountManager.getAccountByILPAddress(transfer.getToAccount());
         if (to.equals(from)) {
@@ -62,16 +63,4 @@ public class SimpleLedger /* implements Ledger, TODO:(0) Still pertinent???. Wha
         }
     }
 
-//    @Override
-//    public void rejectTransfer(LedgerTransfer transfer /* , LedgerTransferRejectedReason reason */) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-// 
-//    public void fulfillCondition(Fulfillment fulfillment) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-// 
-//    public void registerEventHandler(LedgerEventHandler<?> handler) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
 }

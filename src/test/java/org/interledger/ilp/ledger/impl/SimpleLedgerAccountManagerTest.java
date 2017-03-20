@@ -21,11 +21,12 @@ import org.junit.Test;
  */
 public class SimpleLedgerAccountManagerTest {
     
-    SimpleLedgerAccountManager instance;
+    LedgerAccountManager instance;
     
     @Before
     public void setUp() {
-        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
+//        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
+    	instance = LedgerAccountManagerFactory.getAccountManagerSingleton();
     }
     
     /**

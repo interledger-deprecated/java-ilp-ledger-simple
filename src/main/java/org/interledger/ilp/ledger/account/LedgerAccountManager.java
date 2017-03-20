@@ -12,8 +12,6 @@ import org.interledger.ilp.core.ledger.model.LedgerInfo;
  */
 public interface LedgerAccountManager {
 
-    LedgerInfo getLedgerInfo();
-
     LedgerAccount create(String name);
 
     int getTotalAccounts();
@@ -23,4 +21,6 @@ public interface LedgerAccountManager {
     LedgerAccount getAccountByILPAddress(InterledgerAddress address) throws AccountNotFoundException;
 
     Collection<LedgerAccount> getAccounts(int page, int pageSize);
+    
+    
 }

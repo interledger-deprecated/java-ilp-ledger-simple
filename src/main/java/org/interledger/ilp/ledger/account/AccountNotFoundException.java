@@ -9,6 +9,8 @@ import org.interledger.ilp.core.exceptions.InterledgerException;
  */
 public class AccountNotFoundException extends InterledgerException {
 
+    private static final long serialVersionUID = 1L;
+
     /**
 	 * 
 	 */
