@@ -2,8 +2,19 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 
+Properties props = new Properties()
+props.load(new FileInputStream("../java-ilp-master/interledger_versioning.prop"))
+Properties props_auxi = new Properties()
+props_auxi.load(new FileInputStream("../java-ilp-master/external_library_versioning.prop"))
+
+props.putAll(props_auxi);
+
 group = 'org.interledger'
-version = java_ilp_ledger_simple_version
+version =  props.java_ilp_ledger_simple_version
+
+
+
+
 description = "Simple in-memory interledger implementation"
 
 sourceCompatibility = 1.6
@@ -23,15 +34,16 @@ repositories {
 }
 
 dependencies {
-    compile     "org.interledger:java-ilp-core:${java_ilp_core_version}"
-    compile     "org.javamoney:moneta:${moneta_version}"
-    compile     "commons-lang:commons-lang:${commons_lang_version}"
-    testCompile "junit:junit:${junit_version}"
-    testCompile "org.hamcrest:hamcrest-core:${hamcrest_core_version}"
+    compile     "org.interledger:java-ilp-core:${props.java_ilp_core_version}"
+    compile     "org.javamoney:moneta:${props.moneta_version}"
+    compile     "commons-lang:commons-lang:${props.commons_lang_version}"
+    testCompile "junit:junit:${props.junit_version}"
+    testCompile "org.hamcrest:hamcrest-core:${props.hamcrest_core_version}"
 }
 
 //Maven compatibility task:
-task writePom << {
+task writePom  {
+  doLast {
     pom {
         project {
             description project.description                        
@@ -65,4 +77,5 @@ task writePom << {
         }
         
     }.writeTo("pom.xml")
+  }
 }
