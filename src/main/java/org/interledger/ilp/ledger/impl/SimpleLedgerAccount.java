@@ -1,9 +1,10 @@
 package org.interledger.ilp.ledger.impl;
 
-import java.util.Currency;
+
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
-import org.apache.commons.lang.StringUtils;
+
+import org.interledger.ilp.core.InterledgerAddress;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.interledger.ilp.ledger.account.LedgerAccount;
 import org.javamoney.moneta.Money;
@@ -15,39 +16,39 @@ import org.javamoney.moneta.Money;
  */
 public class SimpleLedgerAccount implements LedgerAccount {
 
-    private final String name;
-    private final String currencyCode;
+    private final InterledgerAddress ilpAddress; 
+    private final CurrencyUnit currencyUnit;
     private MonetaryAmount balance;
 
-    public SimpleLedgerAccount(String name, Currency currency) {
-        this(name, currency.getCurrencyCode());
+    public SimpleLedgerAccount(String ilpAddress, CurrencyUnit currencyUnit) {
+    	// TODO:(0.5) FIXME: A single account can be associated to different ilpAddresses.
+    	//     At this moment ilpAddress is used as account.name
+        this.ilpAddress = new InterledgerAddress(ilpAddress); // <-- This is mostly wrong in practice
+        this.currencyUnit = currencyUnit;
     }
 
-    public SimpleLedgerAccount(String name, CurrencyUnit currencyUnit) {
-        this(name, currencyUnit.getCurrencyCode());
-    }
 
-    public SimpleLedgerAccount(String name, String currencyCode) {
-        if (StringUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("empty account name");
-        }
-        this.name = name;
-        this.currencyCode = currencyCode;
-    }
+
 
     @Override
     public String getName() {
-        return name;
+        return ilpAddress.toString();
     }
+    
+
+	@Override
+	public InterledgerAddress getInterledgerAddress() {
+		throw new RuntimeException(); // TODO:(0) FIXME: implement
+	}
 
     @Override
-    public String getCurrencyCode() {
-        return currencyCode;
+    public CurrencyUnit getCurrencyCode() {
+        return this.currencyUnit;
     }
 
     @Override
     public SimpleLedgerAccount setBalance(Number balance) {
-        return setBalance(Money.of(balance, currencyCode));
+        return setBalance(Money.of(balance, currencyUnit));
     }
 
     @Override
@@ -59,7 +60,7 @@ public class SimpleLedgerAccount implements LedgerAccount {
     @Override
     public MonetaryAmount getBalance() {
         if (balance == null) {
-            balance = Money.of(0, currencyCode);
+            balance = Money.of(0, currencyUnit);
         }
         return balance;
     }
@@ -74,13 +75,9 @@ public class SimpleLedgerAccount implements LedgerAccount {
         return getBalance().getNumber();
     }
     
-    public SimpleLedgerAccount credit(String amount) {
-        return credit(toMonetaryAmount(amount));
-    }
-
     @Override
     public SimpleLedgerAccount credit(Number amount) {
-        return credit(Money.of(amount, currencyCode));
+        return credit(Money.of(amount, currencyUnit));
     }
 
     @Override
@@ -88,14 +85,10 @@ public class SimpleLedgerAccount implements LedgerAccount {
         setBalance(getBalance().add(amount));
         return this;
     }
-
-    public SimpleLedgerAccount debit(String amount) {
-        return debit(toMonetaryAmount(amount));
-    }
     
     @Override
     public SimpleLedgerAccount debit(Number amount) {
-        return debit(Money.of(amount, currencyCode));
+        return debit(Money.of(amount, currencyUnit));
     }
 
     @Override
@@ -112,19 +105,19 @@ public class SimpleLedgerAccount implements LedgerAccount {
         if(obj == this) {
             return true;
         }
-        return name.equalsIgnoreCase(((SimpleLedgerAccount)obj).getName());
+        return ilpAddress.equals(((SimpleLedgerAccount)obj).getName());
     }
     
     @Override
     public String toString() {
         return "Account["
-                + "name:" + name
+                + "ilpAddress:" + ilpAddress
                 + " balance:" + balance
                 + "]";
     }
 
-    protected MonetaryAmount toMonetaryAmount(String amount) {
-        return MoneyUtils.toMonetaryAmount(amount, currencyCode);
+    protected MonetaryAmount toMonetaryAmount(MonetaryAmount amount) {
+        return MoneyUtils.toMonetaryAmount(amount, currencyUnit);
     }
 
 }

@@ -9,6 +9,7 @@ import javax.money.Monetary;
  *
  * @author mrmx
  */
+// TODO:(0) Recheck ussage of this class.
 public enum Currencies {
     EURO("EUR"),
     US_DOLLAR("USD"),

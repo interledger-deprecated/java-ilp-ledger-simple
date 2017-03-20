@@ -1,7 +1,9 @@
 package org.interledger.ilp.ledger.account;
 
 import java.util.Collection;
-import org.interledger.ilp.core.LedgerInfo;
+
+import org.interledger.ilp.core.InterledgerAddress;
+import org.interledger.ilp.core.ledger.model.LedgerInfo;
 
 /**
  * Defines account management.
@@ -18,7 +20,7 @@ public interface LedgerAccountManager {
 
     void addAccount(LedgerAccount account);
 
-    LedgerAccount getAccountByName(String name) throws AccountNotFoundException;
+    LedgerAccount getAccountByILPAddress(InterledgerAddress address) throws AccountNotFoundException;
 
     Collection<LedgerAccount> getAccounts(int page, int pageSize);
 }

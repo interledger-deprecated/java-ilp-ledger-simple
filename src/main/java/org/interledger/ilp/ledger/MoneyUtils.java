@@ -1,7 +1,8 @@
 package org.interledger.ilp.ledger;
 
-import java.math.BigDecimal;
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+
 import org.javamoney.moneta.Money;
 
 /**
@@ -13,8 +14,8 @@ public class MoneyUtils {
     private MoneyUtils() {
     }
     
-    public static MonetaryAmount toMonetaryAmount(String amount,String currencyCode) {
-        return Money.of(new BigDecimal(amount),currencyCode);
+    public static MonetaryAmount toMonetaryAmount(MonetaryAmount amount, CurrencyUnit currencyCode) {
+        return Money.of(amount.getNumber(),currencyCode);
     }
      
 }

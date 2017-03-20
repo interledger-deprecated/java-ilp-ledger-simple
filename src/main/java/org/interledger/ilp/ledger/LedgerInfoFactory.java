@@ -1,9 +1,14 @@
 package org.interledger.ilp.ledger;
 
+import java.security.PublicKey;
 import java.util.Currency;
+
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
-import org.interledger.ilp.core.LedgerInfo;
+import javax.money.format.MonetaryAmountFormat;
+
+import org.interledger.ilp.core.InterledgerAddress;
+import org.interledger.ilp.core.ledger.model.LedgerInfo;
 
 /**
  * LedgerInfo factory
@@ -92,6 +97,42 @@ public class LedgerInfoFactory {
         public String getCurrencySymbol() {
             return currencySymbol;
         }
+
+		@Override
+		public InterledgerAddress getAddressPrefix() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public PublicKey getConditionSignPublicKey() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public CurrencyUnit getCurrencyUnit() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		// 
+
+		@Override
+		public String getId() {
+			throw new RuntimeException("Not implemented"); // TODO:(0) FIXME Implement
+
+		}
+
+		@Override
+		public MonetaryAmountFormat getMonetaryAmountFormat() {
+			throw new RuntimeException("Not implemented"); // TODO:(0) FIXME Implement
+		}
+
+		@Override
+		public PublicKey getNotificationSignPublicKey() {
+			throw new RuntimeException("Not implemented"); // TODO:(0) FIXME Implement
+		}
 
     }
 }

@@ -3,7 +3,9 @@ package org.interledger.ilp.ledger.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.interledger.ilp.core.LedgerInfo;
+
+import org.interledger.ilp.core.InterledgerAddress;
+import org.interledger.ilp.core.ledger.model.LedgerInfo;
 import org.interledger.ilp.ledger.account.AccountNotFoundException;
 import org.interledger.ilp.ledger.account.LedgerAccount;
 import org.interledger.ilp.ledger.account.LedgerAccountManager;
@@ -16,11 +18,11 @@ import org.interledger.ilp.ledger.account.LedgerAccountManager;
 public class SimpleLedgerAccountManager implements LedgerAccountManager {
 
     private LedgerInfo ledgerInfo;
-    private Map<String, LedgerAccount> accountMap;
+    private Map<InterledgerAddress, LedgerAccount> accountMap;
 
     public SimpleLedgerAccountManager(LedgerInfo ledgerInfo) {
         this.ledgerInfo = ledgerInfo;
-        accountMap = new HashMap<String, LedgerAccount>();
+        accountMap = new HashMap<InterledgerAddress, LedgerAccount>();
     }
 
     @Override
@@ -30,7 +32,7 @@ public class SimpleLedgerAccountManager implements LedgerAccountManager {
 
     @Override
     public LedgerAccount create(String name) {
-        return new SimpleLedgerAccount(name, ledgerInfo.getCurrencyCode());
+        return new SimpleLedgerAccount(name, ledgerInfo.getCurrencyUnit());
     }
 
     public void addAccounts(SimpleLedgerAccount... accounts) {
@@ -41,13 +43,13 @@ public class SimpleLedgerAccountManager implements LedgerAccountManager {
 
     @Override
     public void addAccount(LedgerAccount account) {
-        accountMap.put(account.getName(), account);
+        accountMap.put(account.getInterledgerAddress(), account);
     }
 
     @Override
-    public LedgerAccount getAccountByName(String name) throws AccountNotFoundException {
+    public LedgerAccount getAccountByILPAddress(InterledgerAddress name) throws AccountNotFoundException {
         if(!accountMap.containsKey(name)) {
-            throw new AccountNotFoundException(name);
+            throw new AccountNotFoundException(name.toString());
         }
         return accountMap.get(name);
     }

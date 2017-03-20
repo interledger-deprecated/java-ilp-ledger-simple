@@ -1,17 +1,24 @@
 package org.interledger.ilp.ledger.account;
 
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+
+import org.interledger.ilp.core.InterledgerAddress;
 
 /**
  * This interface defines a ledger account.
  *
  * @author mrmx
  */
+
+// TODO:(0) Recheck. Reuse interfaces in java-ilp-core
 public interface LedgerAccount {
 
-    String getName();
+    String getName(); // TODO:(0) FIXME: Remove and replace references with getILPAddress ?
+    
+    InterledgerAddress getInterledgerAddress();
 
-    String getCurrencyCode();
+    CurrencyUnit getCurrencyCode(); // TODO:(0) REFACTOR: Rename as getCurrencyUnit
 
     LedgerAccount setBalance(Number balance);
 
