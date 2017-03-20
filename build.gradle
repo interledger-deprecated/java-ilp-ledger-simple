@@ -37,6 +37,7 @@ dependencies {
     compile     "org.interledger:java-ilp-core:${props.java_ilp_core_version}"
     compile     "org.javamoney:moneta:${props.moneta_version}"
     compile     "commons-lang:commons-lang:${props.commons_lang_version}"
+    compile     "com.fasterxml.jackson.core:jackson-annotations:${props.jackson_annotations_version}"
     testCompile "junit:junit:${props.junit_version}"
     testCompile "org.hamcrest:hamcrest-core:${props.hamcrest_core_version}"
 }

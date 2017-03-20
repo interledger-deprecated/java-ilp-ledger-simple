@@ -4,10 +4,12 @@ import java.util.Collection;
 
 //import javax.money.CurrencyUnit;
 
+
 import org.interledger.ilp.core.InterledgerAddress;
 import org.interledger.ilp.ledger.Currencies;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.account.LedgerAccount;
+import org.interledger.ilp.ledger.account.LedgerAccountManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,8 +27,7 @@ public class SimpleLedgerAccountManagerTest {
     
     @Before
     public void setUp() {
-//        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
-    	instance = LedgerAccountManagerFactory.getAccountManagerSingleton();
+        instance = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO));
     }
     
     /**

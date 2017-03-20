@@ -6,7 +6,6 @@ import org.interledger.ilp.core.ledger.model.LedgerTransfer;
 
 import org.interledger.ilp.core.exceptions.InsufficientAmountException;
 import org.interledger.ilp.ledger.Currencies;
-import org.interledger.ilp.ledger.LedgerAccountManagerFactory;
 import org.interledger.ilp.ledger.LedgerInfoFactory;
 import org.interledger.ilp.ledger.MoneyUtils;
 import org.interledger.ilp.ledger.account.LedgerAccount;
@@ -48,7 +47,7 @@ public class SimpleLedger /* implements Ledger, TODO:(0) Still pertinent???. Wha
     }
 
     public void send(LedgerTransfer transfer) {
-    	LedgerAccountManager accountManager = LedgerAccountManagerFactory.getAccountManagerSingleton();
+    	LedgerAccountManager accountManager = new SimpleLedgerAccountManager(LedgerInfoFactory.from(Currencies.EURO /* TODO:(0) FIXME get Currency from conf. file */));
         LedgerAccount from = accountManager.getAccountByILPAddress(transfer.getFromAccount());
         LedgerAccount to = accountManager.getAccountByILPAddress(transfer.getToAccount());
         if (to.equals(from)) {

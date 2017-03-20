@@ -12,6 +12,8 @@ import org.interledger.ilp.core.ledger.model.LedgerInfo;
  */
 public interface LedgerAccountManager {
 
+    public LedgerInfo getLedgerInfo();
+
     LedgerAccount create(String name);
 
     int getTotalAccounts();
